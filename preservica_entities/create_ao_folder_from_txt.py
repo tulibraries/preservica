@@ -1,4 +1,4 @@
-# This script creates folders in Preservica based on input from a tab-delimited text file
+# This script creates archival object folders in Preservica based on input from a tab-delimited text file
 # To use this script, create a tab-delimited text file called "create_folder.txt" and save it in the same directory from which you are running this script
 # The text file should have 4 columns, with the following headers: title, description, security_tag, and folder_reference
 # - title should contain the desired xip.title of the new folder
