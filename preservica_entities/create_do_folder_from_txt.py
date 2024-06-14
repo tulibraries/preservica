@@ -13,7 +13,7 @@ client = EntityAPI()
 import csv
 
 # Read a tab-delimited text file
-with open('create_folder.txt', 'r') as file:
+with open('create_do_folder.txt', 'r') as file:
     reader = csv.DictReader(file, delimiter='\t')
 
     # Iterate through each row in the file
