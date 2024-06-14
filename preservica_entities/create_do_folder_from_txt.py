@@ -1,11 +1,11 @@
-# This script creates folders in Preservica based on input from a tab-delimited text file
+# This script creates archival object folders in Preservica based on input from a tab-delimited text file
 # To use this script, create a tab-delimited text file called "create_folder.txt" and save it in the same directory from which you are running this script
 # The text file should have 4 columns, with the following headers: title, description, security_tag, and folder_reference
 # - title should contain the desired xip.title of the new folder
 # - description should contain the desired xip.description of the new folder
 # - security_tag should contain one of the Preservica security options: open, onsite, public, or restricted
 # - folder_reference should contain the Preservica xip.reference of the desired parent folder for the new folder
-# You will also need the XML metadata file "LegacyXIP_virtual_false.xml" in the same directory from which you are running this script
+# You will also need the XML metadata file "LegacyXIP_accessionRef_catalog.xml" in the same directory from which you are running this script
 
 
 from pyPreservica import *
@@ -30,7 +30,7 @@ with open('create_folder.txt', 'r') as file:
         # add identifier type=code with the same value as the description field
         client.add_identifier(new_folder, "code", description)
         # add Legacy XIP metadata fragment based on external XML file
-        with open("LegacyXIP_virtual_false.xml", 'r', encoding="UTF-8") as md:
+        with open("LegacyXIP_accessionRef_catalog.xml", 'r', encoding="UTF-8") as md:
             folder = client.add_metadata(folder, "http://preservica.com/LegacyXIP", md)
         print(new_folder.reference)
         
