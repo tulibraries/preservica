@@ -31,7 +31,7 @@ with open('create_do_folder.txt', 'r') as file:
         client.add_identifier(new_folder, "code", description)
         # add Legacy XIP metadata fragment based on external XML file
         with open("LegacyXIP_accessionRef_catalog.xml", 'r', encoding="UTF-8") as md:
-            folder = client.add_metadata(folder, "http://preservica.com/LegacyXIP", md)
+            new_folder = client.add_metadata(new_folder, "http://preservica.com/LegacyXIP", md)
         print(new_folder.reference)
         
         # Assert parent folder reference
