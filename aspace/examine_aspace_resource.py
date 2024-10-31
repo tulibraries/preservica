@@ -13,8 +13,8 @@ import json
 import csv
 
 #ASPACE Resource variables
-ASpace_repository =''    # ASpace_repository: 3 (test) or 4 (main) repositories
-ASpace_res_id =  '' # refer to resource uri assigned by ASpace (ex. https://scrcarchivesspace.temple.edu/staff/resources/644#tree::resource_644)
+ASpace_repository = ''    # ASpace_repository: 3 (test) or 4 (main) repositories
+ASpace_res_id = '' # refer to resource uri assigned by ASpace (ex. https://scrcarchivesspace.temple.edu/staff/resources/644#tree::resource_644)
 archival_object_id = '' # leave blank unless restricting data to a particular series or subseries. again, refer to Aspace uri (ex. https://scrcarchivesspace.temple.edu/staff/resources/644#tree::archival_object_237685)
 digital_object_id = '' # leave blank unless looking for the Digital Object JSON model. again, gather the id from the DO's uri.
 
