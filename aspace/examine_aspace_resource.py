@@ -16,9 +16,9 @@ import csv
 ASpace_repository =''    # ASpace_repository: 3 (test) or 4 (main) repositories
 ASpace_res_id =  '' # refer to resource uri assigned by ASpace (ex. https://scrcarchivesspace.temple.edu/staff/resources/644#tree::resource_644)
 archival_object_id = '' # leave blank unless restricting data to a particular series or subseries. again, refer to Aspace uri (ex. https://scrcarchivesspace.temple.edu/staff/resources/644#tree::archival_object_237685)
-
 digital_object_id = '' # leave blank unless looking for the Digital Object JSON model. again, gather the id from the DO's uri.
 
+#Authenticate with the ASpace API
 auth = requests.post(f'{config.ASpace_baseURL}/users/{config.ASpace_user}/login?password={config.ASpace_pw}').json()
 session = auth['session']
 headers = {'X-ArchivesSpace-Session': session, 'Content_Type': 'application/json'}
@@ -38,7 +38,6 @@ output_ao_children = None
 
 ##NEED AN ARCHIVAL OBJECT'S JSON MODEL 
 ##ao = requests.get(config.ASpace_baseURL+ '/repositories/' + ASpace_repository +'/archival_objects/'+archival_object_id, headers=headers, params={'resolve[]': ['top_container']}).json()
-
 if ao:
     print(json.dumps(ao, indent=2))
 
@@ -47,6 +46,7 @@ if ao:
 ##do = requests.get(config.ASpace_baseURL + '/repositories/' + ASpace_repository + '/digital_objects/' +digital_object_id, headers=headers).json()
 if do:
     print(json.dumps(do, indent=2))
+
 
 ##NEED A LIST OF THE CHILDREN ARCHIVAL OBJECTS FROM A SPECIFIC SUB/SERIES?
 output_ao_children = requests.get(config.ASpace_baseURL + '/repositories/' + ASpace_repository + '/archival_objects/'+ archival_object_id +'/children', headers=headers).json() 
