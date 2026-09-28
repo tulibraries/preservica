@@ -33,8 +33,7 @@
 
     <cat:SchemaUri>http://www.preservica.com/archives_space/v1</cat:SchemaUri>
     <cat:RootElement>catalogue</cat:RootElement>
-    <cat:PublicUrl>http://localhost/archive/sdb%3A</cat:PublicUrl>
-    <cat:CatalogueLinkUrlPrefix>http://archivesspace.preservica.co.uk:8080/</cat:CatalogueLinkUrlPrefix>
+    <cat:PublicUrl>https://templeuni.access.preservica.com/archive/sdb%3A</cat:PublicUrl>
     <cat:RecordTypeField>jsonmodel_type</cat:RecordTypeField>
 
     <cat:Levels>
@@ -78,7 +77,7 @@
             <cat:PreservicaEntityType>DeliverableUnit</cat:PreservicaEntityType>
             <cat:XipFieldMappings sdbFieldName="SecurityTag" catalogueFieldName="publish" catalogueToSdb="false">
                 <cat:MappingStrategy>
-                    <cat:Lookup sdbFieldValue="open" catalogueBooleanValue="true" />
+                    <cat:Lookup sdbFieldValue="public" catalogueBooleanValue="true" />
                     <cat:Lookup sdbFieldValue="*" catalogueBooleanValue="false" />
                 </cat:MappingStrategy>
             </cat:XipFieldMappings>
@@ -292,10 +291,10 @@
         </cat:FieldsForXip>
 
         <cat:FieldsForSdbMetadata>
-            <cat:FieldForSdbType>external_documents[]$jsonmodel_type=external_document$title=TypeCollection|TypeDeliverableUnit/title</cat:FieldForSdbType>
+            <cat:FieldForSdbType>external_documents[]$jsonmodel_type=external_document$publish=true$title=TypeCollection|TypeDeliverableUnit/title</cat:FieldForSdbType>
             <cat:FieldForSdbRef>external_documents[]$jsonmodel_type=external_document$title=TypeCollection|TypeDeliverableUnit/location</cat:FieldForSdbRef>
-            <cat:FieldForSdbUrl>notes[]$jsonmodel_type=note_multipart$type=otherfindaid$label=Preservica Internal URL/subnotes[]$jsonmodel_type=note_text/content</cat:FieldForSdbUrl>
-            <cat:FieldForPublicUrl>notes[]$jsonmodel_type=note_multipart$type=otherfindaid$label=Preservica Public URL/subnotes[]$jsonmodel_type=note_text/content</cat:FieldForPublicUrl>
+            <cat:FieldForSdbUrl>notes[]$jsonmodel_type=note_multipart$type=otherfindaid$publish=false$label=Preservica Internal URL/subnotes[]$jsonmodel_type=note_text/content</cat:FieldForSdbUrl>
+            <cat:FieldForPublicUrl>notes[]$jsonmodel_type=note_multipart$type=otherfindaid$publish=false$label=Preservica Public URL/subnotes[]$jsonmodel_type=note_text/content</cat:FieldForPublicUrl>
         </cat:FieldsForSdbMetadata>
 
         <cat:NewCatalogueDefaultFields fieldName="jsonmodel_type" fieldValue="archival_object" />
@@ -324,10 +323,10 @@
         </cat:FieldsForXip>
 
         <cat:FieldsForSdbMetadata>
-            <cat:FieldForSdbType>external_documents[]$jsonmodel_type=external_document$title=TypeCollection|TypeDeliverableUnit/title</cat:FieldForSdbType>
-            <cat:FieldForSdbRef>external_documents[]$jsonmodel_type=external_document$title=TypeCollection|TypeDeliverableUnit/location</cat:FieldForSdbRef>
-            <cat:FieldForSdbUrl>file_versions[]$jsonmodel_type=file_version$use_statement=Digital Preservation Staff System/file_uri</cat:FieldForSdbUrl>
-            <cat:FieldForPublicUrl>file_versions[]$jsonmodel_type=file_version$use_statement=Electronic Record Access System/file_uri</cat:FieldForPublicUrl>
+            <cat:FieldForSdbType>external_documents[]$jsonmodel_type=external_document$publish=false$title=TypeCollection|TypeDeliverableUnit/title</cat:FieldForSdbType>
+            <cat:FieldForSdbRef>external_documents[]$jsonmodel_type=external_document$publish=false$title=TypeCollection|TypeDeliverableUnit/location</cat:FieldForSdbRef>
+            <cat:FieldForSdbUrl>file_versions[]$jsonmodel_type=file_version$publish=false$use_statement=Digital Preservation Staff System/file_uri</cat:FieldForSdbUrl>
+            <cat:FieldForPublicUrl>file_versions[]$jsonmodel_type=file_version$publish=false$use_statement=Electronic Record Access System/file_uri</cat:FieldForPublicUrl>
         </cat:FieldsForSdbMetadata>
 
         <cat:NewCatalogueDefaultFields fieldName="jsonmodel_type" fieldValue="digital_object" />
@@ -366,9 +365,9 @@
         </cat:FieldsForXip>
 
         <cat:FieldsForSdbMetadata>
-            <cat:FieldForSdbType>external_documents[]$jsonmodel_type=external_document$title=TypeCollection|TypeDeliverableUnit/title</cat:FieldForSdbType>
-            <cat:FieldForSdbRef>external_documents[]$jsonmodel_type=external_document$title=TypeCollection|TypeDeliverableUnit/location</cat:FieldForSdbRef>
-            <cat:FieldForSdbUrl>file_versions[]$jsonmodel_type=file_version$use_statement=Digital Preservation Staff System/file_uri</cat:FieldForSdbUrl>
+            <cat:FieldForSdbType>external_documents[]$jsonmodel_type=external_document$publish=false$title=TypeCollection|TypeDeliverableUnit/title</cat:FieldForSdbType>
+            <cat:FieldForSdbRef>external_documents[]$jsonmodel_type=external_document$publish=false$title=TypeCollection|TypeDeliverableUnit/location</cat:FieldForSdbRef>
+            <cat:FieldForSdbUrl>file_versions[]$jsonmodel_type=file_version$publish=false$use_statement=Digital Preservation Staff System/file_uri</cat:FieldForSdbUrl>
             <cat:FieldForPublicUrl>file_versions[]$jsonmodel_type=file_version$use_statement=Electronic Record Access System/file_uri</cat:FieldForPublicUrl>
         </cat:FieldsForSdbMetadata>
 
@@ -389,7 +388,4 @@
     <cat:DeletionNote><![CDATA[<p>Former child record (${mapped_record}) was deleted from catalogue on [${deletion_date}] as matching Preservica ${preservica_type} ${preservica_ref} was deleted.</p>]]></cat:DeletionNote>
 
     <cat:CustomParameter name="RawJsonFieldName" value="RawJson" />
-    <cat:CustomParameter name="HtmlWrapSdbUrl" value="Preservica Internal" />
-    <cat:CustomParameter name="HtmlWrapPublicUrl" value="Preservica Access" />
-    <cat:CustomParameter name="HtmlWrapSoftLinkUrl" value="ArchivesSpace Link" />
 </cat:catalogueMapping>
