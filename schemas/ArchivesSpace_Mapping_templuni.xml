@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- 
+Updated Oct. 2026
+-established version control
+-configured publishing behavior 
+-->
+
 <!--
   ~ (c) Copyright 2015 Preservica
   ~ All rights reserved.
@@ -75,6 +81,9 @@
         <cat:FieldsForXip>
             <cat:PreservicaEntityType>Collection</cat:PreservicaEntityType>
             <cat:PreservicaEntityType>DeliverableUnit</cat:PreservicaEntityType>
+
+            <!-- This controls the publishing of digital object itself -->
+            <!-- Map security tag so only 'public' is published -->
             <cat:XipFieldMappings sdbFieldName="SecurityTag" catalogueFieldName="publish" catalogueToSdb="false">
                 <cat:MappingStrategy>
                     <cat:Lookup sdbFieldValue="public" catalogueBooleanValue="true" />
@@ -98,8 +107,9 @@
             </cat:XipFieldMappings>
         </cat:FieldsForXip>
 		
+        <!-- Set publish to false by default -->
         <cat:NewCatalogueDefaultFields fieldName="lock_version" fieldValue="0" />
-        <cat:NewCatalogueDefaultFields fieldName="publish" booleanFieldValue="true" />
+        <cat:NewCatalogueDefaultFields fieldName="publish" booleanFieldValue="false" />
 
         <cat:CatalogueFields catalogueFieldsID="ArchivesSpaceCommonFields">
             <!--
@@ -189,6 +199,7 @@
 
     </cat:FieldMapping>
 
+    <!-- Mappings for Aspace Repository -->
     <cat:FieldMapping recordType="repository">
         <cat:FieldsForSdbLookup>
             <cat:PreservicaEntityType>Collection</cat:PreservicaEntityType>
@@ -211,6 +222,7 @@
 
     </cat:FieldMapping>
 
+    <!-- Mappings for Aspace Resource -->
     <cat:FieldMapping recordType="resource">
         <cat:FieldsForSdbLookup>
             <cat:PreservicaEntityType>Collection</cat:PreservicaEntityType>
@@ -242,11 +254,12 @@
             <cat:XipFieldMappings sdbFieldName="Title" catalogueFieldName="title" truncationForSdb="240"/>
         </cat:FieldsForXip>
 
+        <!-- Unpublish linking metadata for Aspace Resource record -->
         <cat:FieldsForSdbMetadata>
-            <cat:FieldForSdbType>external_documents[]$jsonmodel_type=external_document$title=TypeCollection|TypeDeliverableUnit/title</cat:FieldForSdbType>
-            <cat:FieldForSdbRef>external_documents[]$jsonmodel_type=external_document$title=TypeCollection|TypeDeliverableUnit/location</cat:FieldForSdbRef>
-            <cat:FieldForSdbUrl>notes[]$jsonmodel_type=note_multipart$type=otherfindaid$label=Preservica Internal URL/subnotes[]$jsonmodel_type=note_text/content</cat:FieldForSdbUrl>
-            <cat:FieldForPublicUrl>notes[]$jsonmodel_type=note_multipart$type=otherfindaid$label=Preservica Public URL/subnotes[]$jsonmodel_type=note_text/content</cat:FieldForPublicUrl>
+            <cat:FieldForSdbType>external_documents[]$jsonmodel_type=external_document$publish=false$title=TypeCollection|TypeDeliverableUnit/title</cat:FieldForSdbType>
+            <cat:FieldForSdbRef>external_documents[]$jsonmodel_type=external_document$publish=false$title=TypeCollection|TypeDeliverableUnit/location</cat:FieldForSdbRef>
+            <cat:FieldForSdbUrl>notes[]$jsonmodel_type=note_multipart$type=otherfindaid$publish=false$label=Preservica Internal URL/subnotes[]$jsonmodel_type=note_text/content</cat:FieldForSdbUrl>
+            <cat:FieldForPublicUrl>notes[]$jsonmodel_type=note_multipart$type=otherfindaid$publish=false$label=Preservica Public URL/subnotes[]$jsonmodel_type=note_text/content</cat:FieldForPublicUrl>
         </cat:FieldsForSdbMetadata>
 
         <cat:NewCatalogueDefaultFields fieldName="jsonmodel_type" fieldValue="resource" />
@@ -257,6 +270,7 @@
 
     </cat:FieldMapping>
 
+    <!-- Mappings for Aspace Archival Object -->
     <cat:FieldMapping recordType="archival_object">
         <cat:FieldsForSdbLookup>
             <cat:PreservicaEntityType>Collection</cat:PreservicaEntityType>
@@ -290,9 +304,10 @@
             <cat:XipFieldMappings sdbFieldName="Title" catalogueFieldName="titleAndDate" truncationForSdb="240" sdbToCatalogue="false"/>
         </cat:FieldsForXip>
 
+        <!-- Unpublish linking metadata for Aspace Archival Object record -->
         <cat:FieldsForSdbMetadata>
-            <cat:FieldForSdbType>external_documents[]$jsonmodel_type=external_document$publish=true$title=TypeCollection|TypeDeliverableUnit/title</cat:FieldForSdbType>
-            <cat:FieldForSdbRef>external_documents[]$jsonmodel_type=external_document$title=TypeCollection|TypeDeliverableUnit/location</cat:FieldForSdbRef>
+            <cat:FieldForSdbType>external_documents[]$jsonmodel_type=external_document$publish=false$title=TypeCollection|TypeDeliverableUnit/title</cat:FieldForSdbType>
+            <cat:FieldForSdbRef>external_documents[]$jsonmodel_type=external_document$publish=false$title=TypeCollection|TypeDeliverableUnit/location</cat:FieldForSdbRef>
             <cat:FieldForSdbUrl>notes[]$jsonmodel_type=note_multipart$type=otherfindaid$publish=false$label=Preservica Internal URL/subnotes[]$jsonmodel_type=note_text/content</cat:FieldForSdbUrl>
             <cat:FieldForPublicUrl>notes[]$jsonmodel_type=note_multipart$type=otherfindaid$publish=false$label=Preservica Public URL/subnotes[]$jsonmodel_type=note_text/content</cat:FieldForPublicUrl>
         </cat:FieldsForSdbMetadata>
@@ -301,6 +316,7 @@
 
     </cat:FieldMapping>
 
+    <!-- Mappings for Aspace Digital Object -->
     <cat:FieldMapping recordType="digital_object">
         <cat:FieldsForSdbLookup>
             <cat:PreservicaEntityType>DeliverableUnit</cat:PreservicaEntityType>
@@ -322,13 +338,14 @@
             <cat:XipFieldMappings sdbFieldName="CatalogueReference" catalogueFieldName="digital_object_id" truncationForSdb="240"/>
         </cat:FieldsForXip>
 
+        <!-- Unpublish linking metadata for Aspace Digital Object record -->
         <cat:FieldsForSdbMetadata>
             <cat:FieldForSdbType>external_documents[]$jsonmodel_type=external_document$publish=false$title=TypeCollection|TypeDeliverableUnit/title</cat:FieldForSdbType>
             <cat:FieldForSdbRef>external_documents[]$jsonmodel_type=external_document$publish=false$title=TypeCollection|TypeDeliverableUnit/location</cat:FieldForSdbRef>
             <cat:FieldForSdbUrl>file_versions[]$jsonmodel_type=file_version$publish=false$use_statement=Digital Preservation Staff System/file_uri</cat:FieldForSdbUrl>
             <cat:FieldForPublicUrl>file_versions[]$jsonmodel_type=file_version$publish=false$use_statement=Electronic Record Access System/file_uri</cat:FieldForPublicUrl>
         </cat:FieldsForSdbMetadata>
-
+        
         <cat:NewCatalogueDefaultFields fieldName="jsonmodel_type" fieldValue="digital_object" />
         <cat:NewCatalogueDefaultFields fieldName="level" fieldValue="work" />
 
@@ -344,6 +361,7 @@
 
     </cat:FieldMapping>
 
+    <!-- Mappings for Aspace Digital Object Component -->
     <cat:FieldMapping recordType="digital_object_component">
         <cat:FieldsForSdbLookup>
             <cat:PreservicaEntityType>DeliverableUnit</cat:PreservicaEntityType>
@@ -364,11 +382,12 @@
             <cat:XipFieldMappings sdbFieldName="CatalogueReference" catalogueFieldName="component_id" truncationForSdb="240"/>
         </cat:FieldsForXip>
 
+        <!-- Unpublish linking metadata for Aspace Digital Object Component record -->
         <cat:FieldsForSdbMetadata>
             <cat:FieldForSdbType>external_documents[]$jsonmodel_type=external_document$publish=false$title=TypeCollection|TypeDeliverableUnit/title</cat:FieldForSdbType>
             <cat:FieldForSdbRef>external_documents[]$jsonmodel_type=external_document$publish=false$title=TypeCollection|TypeDeliverableUnit/location</cat:FieldForSdbRef>
             <cat:FieldForSdbUrl>file_versions[]$jsonmodel_type=file_version$publish=false$use_statement=Digital Preservation Staff System/file_uri</cat:FieldForSdbUrl>
-            <cat:FieldForPublicUrl>file_versions[]$jsonmodel_type=file_version$use_statement=Electronic Record Access System/file_uri</cat:FieldForPublicUrl>
+            <cat:FieldForPublicUrl>file_versions[]$jsonmodel_type=file_version$publish=false$use_statement=Electronic Record Access System/file_uri</cat:FieldForPublicUrl>
         </cat:FieldsForSdbMetadata>
 
         <cat:NewCatalogueDefaultFields fieldName="jsonmodel_type" fieldValue="digital_object_component" />
